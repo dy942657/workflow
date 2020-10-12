@@ -1,10 +1,9 @@
 # Mounting volumes for an Application
 
-We can use blow command to create volumes and mount which volume is created.
-Drycc create volume support [ReadWriteMany](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes), so before deploy drycc, have a StorageClass ready which support ReadWriteMany.
+We can use the blow command to create volumes and mount the created volumes.
+Drycc create volume support [ReadWriteMany](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes), so before deploying drycc, you need to have a StorageClass ready which can support ReadWriteMany.
 Deploying drycc, set controller.app_storage_class to this StorageClass.
 
-## Create volume in application
 
 Use `drycc volumes` to mount a volume for a deployed application's processes.
 
@@ -18,22 +17,24 @@ Use `drycc volumes` to mount a volume for a deployed application's processes.
     volumes:unmount          unmount a volume from process of the application
 
     Use 'drycc help [command]' to learn more.
-
-You can create a volume with one `drycc volumes:create` command
+    
+## Create a volume for the application
+You can create a volume with the `drycc volumes:create` command
 
     $ drycc volumes:create myvolume 200M
     Creating myvolumes to scenic-icehouse... done
-
-After volume created, you can list the volumes in this application.
+    
+## List a volume in the application
+After volume is created, you can list the volume in this application.
 
     $ drycc volumes:list
     === scenic-icehouse volumes
     --- myvolumes     200M
 
-## Mounting volume
+## Mount a volume
 
-The volume which is named myvolumes has created, you can mount the volume with process of the application,
-use the command of `drycc volumes:mount`. When volume mounted, a new release is created and deployed automatically.
+The volume which is named myvolumes is created, you can mount the volume with process of the application,
+use the command of `drycc volumes:mount`. When volume is mounted, a new release will be created and deployed automatically.
 
     $ drycc volumes:mount myvolumes web=/data/web
     Mounting volume... done
@@ -45,8 +46,8 @@ And use `drycc volumes:list` show mount detail.
     --- myvolumes     200M
     web               /data/web
 
-If you don't need volume, use `drycc volumes:unmount` unmount the volume and `drycc volumes:delete` delete volume in the application.
-Before deleting volume, the volume has to unmounted.
+If you don't need the volume, use `drycc volumes:unmount` to unmount the volume and then use  `drycc volumes:delete` to delete the volume from the application.
+Before deleting volume, the volume has to be unmounted.
 
     $ drycc volumes:unmount myvolumes web
     Unmounting volume... done
