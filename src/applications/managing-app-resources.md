@@ -3,7 +3,6 @@
 We can use blow command to create resources and bind which resource is created.
 This command depend on [service-catalog](https://svc-cat.io).
 
-## Create resource in application
 
 Use `drycc resources` to create and bind a resource for a deployed application.
 
@@ -19,27 +18,29 @@ Use `drycc resources` to create and bind a resource for a deployed application.
     resources:unbind           unbind a resource from servicebroker
 
     Use 'drycc help [command]' to learn more.
-
+## Create resource in application
 You can create a resource with one `drycc resources:create` command
 
     $ drycc resources:create memcached:custom memcached
     Creating memcached to scenic-icehouse... done
 
-After resource created, you can list the resources in this application.
+After resources are created, you can list the resources in this application.
 
     $ drycc resources:list
     === scenic-icehouse resources
     memcached      memcached:custom
 
-## Binding resources
+## Bind resources
 
-The resource which is named memcached has created, you can bind the memcached with the application,
+The resource which is named memcached is created, you can bind the memcached to the application,
 use the command of `drycc resources:bind memcached`.
 
     $ drycc resources:bind memcached
     Binding resource... done
+    
+## Describe resources
 
-And use `drycc resources:describe` show bind detail. If binding successful, this command will show the information of connect to resource.
+And use `drycc resources:describe` show the binding detail. If the binding is successful, this command will show the information of connect to the resource.
 
     $ drycc resources:describe memcached
     === scenic-icehouse resource memcached
@@ -50,18 +51,18 @@ And use `drycc resources:describe` show bind detail. If binding successful, this
     HOST:        10.1.7.241 10.1.7.101
     PORT:        11211
 
-## Migrating between plans
+## Update resources
 
-You can use the `drycc resources:update` command to migrate to a new plan.
-An example of how to upgrade to a 100MB plan:
+You can use the `drycc resources:update` command to upgrade a new plan.
+An example of how to upgrade the plan's capacity to 100MB:
 
     $ drycc resources:update memcached:100 memcached
     Updating memcached to scenic-icehouse... done
 
-## Removing the resource
+## Remove the resource
 
-If you don't need resources, use `drycc resources:unbind` unbind the resource and `drycc resources:destroy` delete resource in the application.
-Before deleting resource, the resource has to unbind.
+If you don't need resources, use `drycc resources:unbind` to unbind the resource and then use `drycc resources:destroy` to delete the resource from the application.
+Before deleting the resource, the resource must be unbinded.
 
     $ drycc resources:unbind memcached
     Unbinding resource... done
